@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <!-- Tailwind + Flowbite -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+</head>
+<body class="bg-white text-black transition-colors duration-300">
+
+  <!-- Navbar -->
+  <nav class="bg-black dark:bg-white p-4 text-white dark:text-black flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <img src="assets/images/logo.png" alt="Logo" class="h-8 w-8">
+      <h1 class="font-bold text-xl">AI Face Attendance App</h1>
+    </div>
+    <div class="space-x-4">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="src/pages/about/about.html" class="hover:underline">About</a>
+      <a href="src/pages/contact/contact.html" class="hover:underline">Contact</a>
+      <a href="src/pages/blog/blog.html" class="hover:underline">Blog</a>
+    </div>
+    <div class="space-x-4 flex items-center">
+      <a href="src/pages/signin/signin.html" class="hover:underline">Sign In</a>
+      <a href="src/pages/signup/signup.html" class="hover:underline">Sign Up</a>
+      <button id="theme-toggle" class="p-2 rounded border">Toggle Theme</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-gray-100 dark:bg-gray-800 text-center py-16">
+    <h1 class="text-5xl font-bold mb-4">Welcome to AI Powered Attendance</h1>
+    <p class="text-lg mb-6">Smart, Secure, and Automated Attendance System</p>
+    <button class="px-6 py-2 bg-black dark:bg-white text-white dark:text-black rounded">Get Started</button>
+  </section>
+
+  <!-- Gallery (Cards) -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6 p-10">
+    <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-4">
+      <img src="assets/images/classroom.jpg" alt="Classroom" class="rounded-lg mb-4">
+      <h3 class="font-bold">Classroom Attendance</h3>
+      <p class="text-sm">Track attendance in real-time.</p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-4">
+      <img src="assets/images/facescan.jpg" alt="Face Scan" class="rounded-lg mb-4">
+      <h3 class="font-bold">Face Scan</h3>
+      <p class="text-sm">Secure biometric verification.</p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-4">
+      <img src="assets/images/ai-attendance.jpg" alt="AI Attendance" class="rounded-lg mb-4">
+      <h3 class="font-bold">AI Attendance</h3>
+      <p class="text-sm">Automated and efficient system.</p>
+    </div>
+  </section>
+
+  <!-- Attendance Table -->
+  <section class="p-10 bg-white dark:bg-black rounded-lg shadow">
+    <h2 class="text-2xl font-bold mb-4">Attendance Records</h2>
+    <table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
+      <thead class="bg-black dark:bg-white text-white dark:text-black">
+        <tr>
+          <th class="border p-2">Name</th>
+          <th class="border p-2">Status</th>
+          <th class="border p-2">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border p-2">Ahmad</td>
+          <td class="border p-2">Present</td>
+          <td class="border p-2">9:00 AM</td>
+        </tr>
+        <tr>
+          <td class="border p-2">Ali</td>
+          <td class="border p-2">Late</td>
+          <td class="border p-2">9:15 AM</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Badges + Alerts -->
+  <section class="p-10">
+    <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Active</span>
+    <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Inactive</span>
+    <div class="mt-4 p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+      <span class="font-medium">Info:</span> Attendance system is running smoothly.
+    </div>
+  </section>
+
+  <!-- System Variables -->
+  <section class="p-10 bg-white dark:bg-black rounded-lg shadow">
+    <h2 class="text-2xl font-bold mb-4">System Variables</h2>
+    <p>Project Name: <span id="projectName"></span></p>
+    <p>Total Students: <span id="totalStudents"></span></p>
+    <p>System Active: <span id="systemActive"></span></p>
+    <p>Registered Students: <span id="registeredStudents"></span></p>
+    <p>Sample Record: <span id="studentRecord"></span></p>
+    <button id="summaryBtn" class="mt-4 px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded">Show System Summary</button>
+    <div id="output" class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded shadow"></div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="p-10 bg-gray-100 dark:bg-gray-800">
+    <h2 class="text-2xl font-bold mb-6 text-center">What Students Say</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="p-6 bg-white dark:bg-gray-700 rounded shadow">
+        <p>"This system makes attendance effortless!"</p>
+        <span class="block mt-2 font-bold">- Sara</span>
+      </div>
+      <div class="p-6 bg-white dark:bg-gray-700 rounded shadow">
+        <p>"Secure and reliable for our classes."</p>
+        <span class="block mt-2 font-bold">- Urooj</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="p-10 bg-white dark:bg-black">
+    <h2 class="text-2xl font-bold mb-6 text-center">System Stats</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <p class="text-3xl font-bold">50+</p>
+        <p>Students</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold">95%</p>
+        <p>Accuracy</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold">24/7</p>
+        <p>Availability</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold">100%</p>
+        <p>Secure</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black dark:bg-white text-white dark:text-black text-center p-4 mt-10">
+    <p>&#169; 2026 Face Recognition System</p>
+    <div class="flex justify-center space-x-4 mt-2">
+      <a href="#" class="hover:underline">Facebook</a>
+      <a href="#" class="hover:underline">Twitter</a>
+      <a href="#" class="hover:underline">LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="src/pages/script/toggle.js" defer></script>
+  <script src="src/pages/script/home.js" defer></script>
+</body>
+</html>
