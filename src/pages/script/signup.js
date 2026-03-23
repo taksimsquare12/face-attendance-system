@@ -1,69 +1,48 @@
-// signup.js
-document.addEventListener("DOMContentLoaded", () => {
-  // Password Strength Checker
-  const passwordInput = document.getElementById("password");
-  const strengthBar = document.getElementById("strengthBar");
+const form = document.getElementById("signupForm");
+const alertBox = document.getElementById("signupAlert");
+const strengthBar = document.getElementById("strengthBar");
 
-  if (passwordInput && strengthBar) {
-    passwordInput.addEventListener("input", () => {
-      const value = passwordInput.value;
-      let strength = 0;
+const passwordInput = document.getElementById("password");
 
-      if (value.length >= 6) strength++;
-      if (/[A-Z]/.test(value)) strength++;
-      if (/[0-9]/.test(value)) strength++;
-      if (/[^A-Za-z0-9]/.test(value)) strength++;
+passwordInput.addEventListener("input", () => {
+  let val = passwordInput.value;
+  let strength = 0;
 
-      const classes = "h-2.5 rounded-full transition-all duration-300";
-      switch (strength) {
-        case 0:
-          strengthBar.style.width = "0%";
-          strengthBar.className = `bg-red-600 ${classes}`;
-          break;
-        case 1:
-          strengthBar.style.width = "25%";
-          strengthBar.className = `bg-red-600 ${classes}`;
-          break;
-        case 2:
-          strengthBar.style.width = "50%";
-          strengthBar.className = `bg-yellow-500 ${classes}`;
-          break;
-        case 3:
-          strengthBar.style.width = "75%";
-          strengthBar.className = `bg-blue-500 ${classes}`;
-          break;
-        case 4:
-          strengthBar.style.width = "100%";
-          strengthBar.className = `bg-green-600 ${classes}`;
-          break;
-      }
-    });
+  if (val.length > 5) strength += 30;
+  if (val.match(/[A-Z]/)) strength += 20;
+  if (val.match(/[0-9]/)) strength += 20;
+  if (val.match(/[^A-Za-z0-9]/)) strength += 30;
+
+  strengthBar.style.width = strength + "%";
+
+  if (strength < 40) strengthBar.className = "bg-red-500 h-2 rounded";
+  else if (strength < 70) strengthBar.className = "bg-yellow-400 h-2 rounded";
+  else strengthBar.className = "bg-green-500 h-2 rounded";
+});
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let password = passwordInput.value;
+  let terms = document.getElementById("terms").checked;
+
+  if (!name || !email || !password || !terms) {
+    alertBox.className = "p-3 bg-red-500 text-white rounded";
+    alertBox.innerText = "Please fill all fields and accept terms!";
+    alertBox.classList.remove("hidden");
+    return;
   }
 
-  // Sign Up Form Validation
-  const form = document.getElementById("signupForm");
-  const messageBox = document.getElementById("signupMessage");
+  // Save user (LocalStorage - Lab 4 base)
+  let user = { name, email, password };
+  localStorage.setItem("user", JSON.stringify(user));
 
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+  alertBox.className = "p-3 bg-green-500 text-white rounded";
+  alertBox.innerText = "Signup successful!";
+  alertBox.classList.remove("hidden");
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const terms = document.getElementById("terms").checked;
-
-      if (name === "" || !email.includes("@") || password.length < 6 || !terms) {
-        messageBox.textContent = "❌ Please fill all fields correctly and accept Terms.";
-        messageBox.className = "p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-700 dark:text-red-400";
-      } else {
-        messageBox.textContent = "✅ Account created successfully!";
-        messageBox.className = "p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-700 dark:text-green-400";
-        form.reset();
-        if (strengthBar) {
-          strengthBar.style.width = "0%"; // reset strength bar
-        }
-      }
-    });
-  }
+  form.reset();
+  strengthBar.style.width = "0%";
 });

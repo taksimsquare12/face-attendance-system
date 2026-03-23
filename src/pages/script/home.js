@@ -1,37 +1,75 @@
 // home.js
 
-// Step 1: Declare Variables (different data types)
-const projectName = "AI Face Attendance System"; // String
-const totalStudents = 50; // Number
-const systemActive = true; // Boolean
-const registeredStudents = ["Ahmad", "Ali", "Sara", "Urooj"]; // Array
-const studentRecord = { name: "Ahmad", status: "Present", time: "9:00 AM" }; // Object
+// VARIABLES
+const projectName = "AI Face Attendance System";
+const totalStudents = 50;
+let systemActive = true;
 
-// Step 2: Display Variables Using DOM
+let registeredStudents = ["Ahmad", "Ali", "Sara", "Urooj"];
+
+let studentRecord = {
+  name: "Ahmad",
+  status: "Present",
+  time: "9:00 AM"
+};
+
+// DISPLAY DATA
 document.getElementById("projectName").innerHTML = projectName;
 document.getElementById("totalStudents").innerHTML = totalStudents;
 document.getElementById("systemActive").innerHTML = systemActive ? "Yes" : "No";
 document.getElementById("registeredStudents").innerHTML = registeredStudents.join(", ");
-document.getElementById("studentRecord").innerHTML = `${studentRecord.name} - ${studentRecord.status} at ${studentRecord.time}`;
+document.getElementById("studentRecord").innerHTML =
+  `${studentRecord.name} - ${studentRecord.status} at ${studentRecord.time}`;
 
-// Step 3: Arrow Function for Project Logic(updated summary function)
+
+// RANDOM STATUS SIMULATION (AI FEEL)
+const statuses = ["Present", "Absent", "Late"];
+
+function generateRandomRecord() {
+  let randomStudent = registeredStudents[Math.floor(Math.random() * registeredStudents.length)];
+  let randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+
+  let now = new Date();
+  let time = now.toLocaleTimeString();
+
+  return {
+    name: randomStudent,
+    status: randomStatus,
+    time: time
+  };
+}
+
+
+// SUMMARY FUNCTION
 const showSummary = () => {
+
   const registeredCount = registeredStudents.length;
   const percentageRegistered = ((registeredCount / totalStudents) * 100).toFixed(1);
+
+  // Generate dynamic record
+  studentRecord = generateRandomRecord();
 
   return `
     <strong>System Summary:</strong><br>
     Project: ${projectName}<br>
     Status: ${systemActive ? "✅ Active" : "❌ Inactive"}<br>
-    Registered Students: ${registeredCount} (${percentageRegistered}% of total)<br>
+    Registered Students: ${registeredCount} (${percentageRegistered}%)<br>
     Latest Record: ${studentRecord.name} (${studentRecord.status} at ${studentRecord.time})<br>
-    Overall Accuracy: 95%<br>
+    AI Detection Mode: Smart Recognition Enabled 🤖<br>
     System Health: Running smoothly with secure AI verification
   `;
 };
 
 
-// Step 4: Click Event to Trigger Arrow Function
+// EVENT LISTENER
 document.getElementById("summaryBtn").addEventListener("click", () => {
   document.getElementById("output").innerHTML = showSummary();
+});
+
+
+// EXTRA FEATURE (BONUS 🔥)
+// Toggle System Status on Double Click
+document.getElementById("output").addEventListener("dblclick", () => {
+  systemActive = !systemActive;
+  document.getElementById("systemActive").innerHTML = systemActive ? "Yes" : "No";
 });
