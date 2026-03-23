@@ -1,7 +1,6 @@
 // signin.js
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const form = document.getElementById("loginForm");
   const messageBox = document.getElementById("loginMessage");
 
@@ -9,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
+  const togglePassword = document.getElementById("togglePassword");
 
-
-  // LIVE VALIDATION 🔥
+  // LIVE VALIDATION
   emailInput.addEventListener("input", () => {
     if (emailInput.value.includes("@")) {
       emailInput.classList.add("border-green-500");
@@ -32,6 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // ✅ PASSWORD SHOW/HIDE TOGGLE
+  togglePassword.addEventListener("click", () => {
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      togglePassword.textContent = "Hide";
+    } else {
+      passwordInput.type = "password";
+      togglePassword.textContent = "Show";
+    }
+  });
 
   // FORM SUBMIT
   form.addEventListener("submit", (e) => {
@@ -50,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // SIMULATED LOGIN (AI FEEL 🤖)
+    // SIMULATED LOGIN
     showMessage("⏳ Verifying credentials...", "info");
 
     setTimeout(() => {
@@ -59,16 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       emailInput.classList.remove("border-green-500");
       passwordInput.classList.remove("border-green-500");
-
     }, 1500);
   });
 
-
-  // MESSAGE FUNCTION 🔔
+  // MESSAGE FUNCTION
   function showMessage(text, type) {
-
     let style = "";
-
     switch (type) {
       case "success":
         style = "text-green-800 bg-green-50 dark:bg-gray-700 dark:text-green-400";
@@ -85,10 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
     messageBox.className = `p-4 mb-4 text-sm rounded-lg ${style}`;
     messageBox.classList.remove("hidden");
 
-    // AUTO HIDE
     setTimeout(() => {
       messageBox.classList.add("hidden");
     }, 4000);
   }
-
 });

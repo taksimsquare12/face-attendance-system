@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact</title>
 
+  <!-- Tailwind + Flowbite CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet"/>
 
@@ -23,9 +24,10 @@
 
   <div class="space-x-6 hidden md:block">
     <a href="../../../index.html" class="hover:text-cyan-400">Home</a>
+    <a href="../blog/blog.html" class="hover:text-cyan-400">Blog</a>
     <a href="../about/about.html" class="hover:text-cyan-400">About</a>
     <a href="contact.html" class="text-cyan-400">Contact</a>
-    <a href="../blog/blog.html" class="hover:text-cyan-400">Blog</a>
+    <a href="src/pages/records/records.html" class="hover:text-cyan-400">Records</a>
   </div>
 
   <div class="space-x-4">
@@ -76,7 +78,6 @@
       class="w-full py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg hover:scale-105 transition">
       Send Message
     </button>
-
   </form>
 
   <!-- MODAL BUTTON -->
@@ -86,11 +87,11 @@
       More Info
     </button>
   </div>
-
 </section>
 
 <!-- MODAL -->
-<div id="contactModal" class="hidden fixed top-0 left-0 right-0 z-50 w-full p-4 h-full">
+<div id="contactModal" tabindex="-1" aria-hidden="true"
+  class="hidden fixed top-0 left-0 right-0 z-50 w-full p-4 h-full overflow-y-auto">
   <div class="bg-gray-900 p-6 rounded-lg max-w-md mx-auto mt-20 text-center">
     <h3 class="text-lg font-bold mb-4">Contact Info</h3>
     <p>Email: support@attendanceapp.com</p>
@@ -104,14 +105,16 @@
 
 <!-- FOOTER -->
 <footer class="bg-black text-center p-5 mt-10 border-t border-gray-700">
-  <p>© 2026 AI Attendance</p>
+  <p>© 2026 AI Attendance System</p>
 </footer>
 
 <!-- Scripts -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init();</script>
 
-<script src="../../../src/pages/script/contact.js"></script>
+<!-- ✅ Flowbite JS added -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
+<script src="../../../src/pages/script/contact.js"></script>
 </body>
 </html>

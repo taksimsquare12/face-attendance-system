@@ -1,5 +1,3 @@
-// home.js
-
 // VARIABLES
 const projectName = "AI Face Attendance System";
 const totalStudents = 50;
@@ -13,7 +11,7 @@ let studentRecord = {
   time: "9:00 AM"
 };
 
-// DISPLAY DATA
+// DISPLAY DATA INIT
 document.getElementById("projectName").innerHTML = projectName;
 document.getElementById("totalStudents").innerHTML = totalStudents;
 document.getElementById("systemActive").innerHTML = systemActive ? "Yes" : "No";
@@ -21,14 +19,12 @@ document.getElementById("registeredStudents").innerHTML = registeredStudents.joi
 document.getElementById("studentRecord").innerHTML =
   `${studentRecord.name} - ${studentRecord.status} at ${studentRecord.time}`;
 
-
-// RANDOM STATUS SIMULATION (AI FEEL)
+// RANDOM STATUS SIMULATION
 const statuses = ["Present", "Absent", "Late"];
 
 function generateRandomRecord() {
   let randomStudent = registeredStudents[Math.floor(Math.random() * registeredStudents.length)];
   let randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
-
   let now = new Date();
   let time = now.toLocaleTimeString();
 
@@ -39,17 +35,20 @@ function generateRandomRecord() {
   };
 }
 
-
 // SUMMARY FUNCTION
-const showSummary = () => {
-
+function showSummary() {
   const registeredCount = registeredStudents.length;
   const percentageRegistered = ((registeredCount / totalStudents) * 100).toFixed(1);
 
   // Generate dynamic record
   studentRecord = generateRandomRecord();
 
-  return `
+  // Update studentRecord span
+  document.getElementById("studentRecord").innerHTML =
+    `${studentRecord.name} - ${studentRecord.status} at ${studentRecord.time}`;
+
+  // Inject summary into output div
+  document.getElementById("output").innerHTML = `
     <strong>System Summary:</strong><br>
     Project: ${projectName}<br>
     Status: ${systemActive ? "✅ Active" : "❌ Inactive"}<br>
@@ -58,17 +57,13 @@ const showSummary = () => {
     AI Detection Mode: Smart Recognition Enabled 🤖<br>
     System Health: Running smoothly with secure AI verification
   `;
-};
+}
 
+// EVENT LISTENERS
+document.getElementById("summaryBtn").addEventListener("click", showSummary);
+document.getElementById("showSummaryBtn").addEventListener("click", showSummary);
 
-// EVENT LISTENER
-document.getElementById("summaryBtn").addEventListener("click", () => {
-  document.getElementById("output").innerHTML = showSummary();
-});
-
-
-// EXTRA FEATURE (BONUS 🔥)
-// Toggle System Status on Double Click
+// EXTRA FEATURE: Toggle System Status on Double Click
 document.getElementById("output").addEventListener("dblclick", () => {
   systemActive = !systemActive;
   document.getElementById("systemActive").innerHTML = systemActive ? "Yes" : "No";

@@ -11,7 +11,6 @@
 
   <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-
 </head>
 
 <body class="bg-gray-950 text-white">
@@ -25,9 +24,10 @@
 
   <div class="space-x-6 hidden md:block">
     <a href="index.html" class="hover:text-cyan-400">Home</a>
+    <a href="src/pages/blog/blog.html" class="hover:text-cyan-400">Blog</a>
     <a href="src/pages/about/about.html" class="hover:text-cyan-400">About</a>
     <a href="src/pages/contact/contact.html" class="hover:text-cyan-400">Contact</a>
-    <a href="src/pages/blog/blog.html" class="hover:text-cyan-400">Blog</a>
+    <a href="src/pages/records/records.html" class="hover:text-cyan-400">Records</a>
   </div>
 
   <div class="space-x-4">
@@ -38,21 +38,17 @@
 
 <!-- HERO -->
 <section class="text-center py-24 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
-
   <h1 class="text-5xl md:text-6xl font-bold text-cyan-400 mb-4" data-aos="fade-up">
     AI Face Attendance System
   </h1>
-
   <p class="text-lg text-gray-300 mb-6" data-aos="fade-up">
     Automated Present • Absent • Late Detection
   </p>
-
   <button id="summaryBtn" 
     class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg shadow-lg hover:scale-110 transition"
     data-aos="zoom-in">
     Run AI System
   </button>
-
 </section>
 
 <!-- FEATURES -->
@@ -130,7 +126,7 @@
   </table>
 </section>
 
-<!-- SYSTEM VARIABLES (LAB 3) -->
+<!-- SYSTEM VARIABLES -->
 <section class="p-10 bg-gray-900 rounded-xl m-10">
   <h2 class="text-2xl font-bold mb-4 text-purple-400">System Data</h2>
 
@@ -138,8 +134,9 @@
   <p>Total Students: <span id="totalStudents"></span></p>
   <p>Status: <span id="systemActive"></span></p>
   <p>List: <span id="registeredStudents"></span></p>
+  <p>Record: <span id="studentRecord"></span></p> <!-- ✅ Added -->
 
-  <button onclick="showSummary()" 
+  <button id="showSummaryBtn"
     class="mt-4 px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded">
     Show Summary
   </button>

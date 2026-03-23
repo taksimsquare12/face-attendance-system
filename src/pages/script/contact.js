@@ -1,15 +1,13 @@
 // contact.js
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const form = document.getElementById("contactForm");
   const alertBox = document.getElementById("formAlert");
 
   if (!form) return;
 
-  // LIVE INPUT VALIDATION (AI feel 🔥)
+  // LIVE INPUT VALIDATION
   const inputs = form.querySelectorAll("input, textarea");
-
   inputs.forEach(input => {
     input.addEventListener("input", () => {
       if (input.value.trim() !== "") {
@@ -21,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
 
   // FORM SUBMIT
   form.addEventListener("submit", async (e) => {
@@ -37,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // LOADING STATE 🔄
+    // LOADING STATE
     showAlert("⏳ Sending message...", "info");
 
     const formData = new FormData(form);
@@ -52,25 +49,18 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ok) {
         showAlert("✅ Message sent successfully!", "success");
         form.reset();
-
-        // Reset input borders
         inputs.forEach(i => i.classList.remove("border-green-500"));
-
       } else {
         showAlert("❌ Error sending message.", "error");
       }
-
     } catch (error) {
       showAlert("❌ Network error. Try again.", "error");
     }
   });
 
-
-  // ALERT FUNCTION (Reusable 🔥)
+  // ALERT FUNCTION
   function showAlert(message, type) {
-
     alertBox.textContent = message;
-
     let style = "";
 
     switch (type) {
@@ -88,10 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
     alertBox.className = `p-4 mb-4 text-sm rounded-lg ${style}`;
     alertBox.classList.remove("hidden");
 
-    // AUTO HIDE ⏳
+    // AUTO HIDE
     setTimeout(() => {
       alertBox.classList.add("hidden");
     }, 4000);
   }
-
 });
