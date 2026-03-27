@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Records</title>
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-950 text-white">
+
+<!-- NAVBAR -->
+<nav class="bg-black/70 backdrop-blur-lg p-4 flex justify-between items-center border-b border-gray-700">
+  <div class="flex items-center space-x-2">
+    <img src="../../../assets/images/logo.png" class="h-8 w-8">
+    <h1 class="font-bold text-xl text-cyan-400">AI Attendance</h1>
+  </div>
+  <div class="space-x-6 hidden md:block">
+    <a href="../../../index.html" class="hover:text-cyan-400">Home</a>
+    <a href="../blog/blog.html" class="hover:text-cyan-400">Blog</a>
+    <a href="../about/about.html" class="hover:text-cyan-400">About</a>
+    <a href="../contact/contact.html" class="hover:text-cyan-400">Contact</a>
+    <a href="records.html" class="hover:text-cyan-400">Records</a>
+  </div>
+
+  <div class="space-x-4">
+    <a href="../signin/signin.html" class="hover:text-cyan-400">Sign In</a>
+    <a href="../signup/signup.html" class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg">Sign Up</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="text-center py-14 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+  <h1 class="text-4xl font-bold text-cyan-400">Student Attendance Records</h1>
+  <p class="text-gray-300">CRUD Operations + Search + Loops</p>
+</section>
+
+<!-- FORM -->
+<section class="max-w-3xl mx-auto bg-gray-900 p-8 rounded-xl shadow-lg mt-10">
+  <h2 class="text-2xl font-bold text-purple-400 mb-6">Add New Student</h2>
+  <form id="addForm" class="flex gap-4 mb-6">
+    <input id="newName" placeholder="Student Name"
+      class="flex-1 p-2 rounded bg-black border border-gray-700 text-white">
+    <select id="newStatus" class="p-2 rounded bg-black border border-gray-700 text-white">
+      <option>Present</option>
+      <option>Absent</option>
+      <option>Late</option>
+    </select>
+    <button type="submit"
+      class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg">
+      Add
+    </button>
+  </form>
+
+  <!-- SEARCH -->
+  <div class="mb-6">
+    <input id="searchBox" placeholder="Search by name..."
+      class="w-full p-2 rounded bg-black border border-gray-700 text-white">
+  </div>
+
+  <!-- GRID CARDS -->
+  <div id="studentGrid" class="grid md:grid-cols-3 gap-6"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-black text-center p-5 mt-10 border-t border-gray-700">
+  <p>© 2026 AI Attendance System</p>
+</footer>
+
+<!-- Scripts -->
+<script type="module">
+  import { students } from "../../../src/pages/database/student.js";
+
+  const grid = document.getElementById("studentGrid");
+  const form = document.getElementById("addForm");
+  const searchBox = document.getElementById("searchBox");
+
+  // Render function
+  const renderStudents = (list = students) => {
+    grid.innerHTML = "";
+    list.map(student => {
+      const card = document.createElement("div");
+      card.className = "bg-black border border-gray-700 rounded p-4";
+      card.innerHTML = `
+        <h3 class="text-lg font-bold text-cyan-400">${student.name}</h3>
+        <p>Status: ${student.status}</p>
+        <button class="bg-blue-500 text-white px-2 py-1 mt-2" onclick="editStudent(${student.id})">Edit</button>
+        <button class="bg-red-500 text-white px-2 py-1 mt-2" onclick="deleteStudent(${student.id})">Delete</button>
+      `;
+      grid.appendChild(card);
+    });
+  };
+
+  // Add new student
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const name = document.getElementById("newName").value.trim();
+    const status = document.getElementById("newStatus").value;
+    if (name) {
+      const newId = students.length ? students[students.length - 1].id + 1 : 1;
+      students.push({ id: newId, name, status });
+      renderStudents();
+      form.reset();
+    }
+  });
+
+  // Edit student
+  window.editStudent = id => {
+    const student = students.find(s => s.id === id);
+    const newStatus = prompt("Update status:", student.status);
+    if (newStatus) {
+      student.status = newStatus;
+      renderStudents();
+    }
+  };
+
+  // Delete student
+  window.deleteStudent = id => {
+    const index = students.findIndex(s => s.id === id);
+    if (index !== -1) {
+      students.splice(index, 1);
+      renderStudents();
+    }
+  };
+
+  // Search
+  searchBox.addEventListener("input", e => {
+    const term = e.target.value.toLowerCase();
+    const filtered = students.filter(s => s.name.toLowerCase().includes(term));
+    renderStudents(filtered);
+  });
+
+  // Initial render
+  renderStudents();
+</script>
+</body>
+</html>

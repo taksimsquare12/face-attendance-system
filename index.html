@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Attendance</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <!-- Tailwind + Flowbite -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet"/>
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+</head>
+
+<body class="bg-gray-950 text-white">
+
+<!-- NAVBAR -->
+<nav class="bg-black/70 backdrop-blur-lg p-4 flex justify-between items-center border-b border-gray-700">
+  <div class="flex items-center space-x-2">
+    <img src="assets/images/logo.png" class="h-8 w-8">
+    <h1 class="font-bold text-xl text-cyan-400">AI Attendance</h1>
+  </div>
+
+  <div class="space-x-6 hidden md:block">
+    <a href="index.html" class="hover:text-cyan-400">Home</a>
+    <a href="src/pages/blog/blog.html" class="hover:text-cyan-400">Blog</a>
+    <a href="src/pages/about/about.html" class="hover:text-cyan-400">About</a>
+    <a href="src/pages/contact/contact.html" class="hover:text-cyan-400">Contact</a>
+    <a href="src/pages/records/records.html" class="hover:text-cyan-400">Records</a>
+  </div>
+
+  <div class="space-x-4">
+    <a href="src/pages/signin/signin.html" class="hover:text-cyan-400">Sign In</a>
+    <a href="src/pages/signup/signup.html" class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg">Sign Up</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="text-center py-24 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+  <h1 class="text-5xl md:text-6xl font-bold text-cyan-400 mb-4" data-aos="fade-up">
+    AI Face Attendance System
+  </h1>
+  <p class="text-lg text-gray-300 mb-6" data-aos="fade-up">
+    Automated Present • Absent • Late Detection
+  </p>
+  <button id="summaryBtn" 
+    class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg shadow-lg hover:scale-110 transition"
+    data-aos="zoom-in">
+    Run AI System
+  </button>
+</section>
+
+<!-- FEATURES -->
+<section class="grid md:grid-cols-3 gap-8 p-10">
+
+  <div class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition shadow-lg" data-aos="zoom-in">
+    <h2 class="text-xl font-bold text-cyan-400">Spoof Detection</h2>
+    <p class="text-gray-400 mt-2">Prevent fake attendance using AI liveness detection.</p>
+  </div>
+
+  <div class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition shadow-lg" data-aos="zoom-in">
+    <h2 class="text-xl font-bold text-purple-400">Cloud Dashboard</h2>
+    <p class="text-gray-400 mt-2">Monitor attendance in real-time anywhere.</p>
+  </div>
+
+  <div class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition shadow-lg" data-aos="zoom-in">
+    <h2 class="text-xl font-bold text-pink-400">Real-Time Tracking</h2>
+    <p class="text-gray-400 mt-2">Track student presence continuously.</p>
+  </div>
+
+</section>
+
+<!-- GALLERY -->
+<section class="grid md:grid-cols-3 gap-6 p-10">
+
+  <div class="bg-gray-900 rounded-lg overflow-hidden hover:scale-105 transition" data-aos="fade-up">
+    <img src="assets/images/classroom.jpg" class="w-full">
+    <div class="p-4">
+      <h3 class="font-bold text-cyan-400">Smart Classroom</h3>
+    </div>
+  </div>
+
+  <div class="bg-gray-900 rounded-lg overflow-hidden hover:scale-105 transition" data-aos="fade-up">
+    <img src="assets/images/facescan.jpg" class="w-full">
+    <div class="p-4">
+      <h3 class="font-bold text-purple-400">Face Recognition</h3>
+    </div>
+  </div>
+
+  <div class="bg-gray-900 rounded-lg overflow-hidden hover:scale-105 transition" data-aos="fade-up">
+    <img src="assets/images/ai-attendance.jpg" class="w-full">
+    <div class="p-4">
+      <h3 class="font-bold text-pink-400">AI Automation</h3>
+    </div>
+  </div>
+
+</section>
+
+<!-- TABLE -->
+<section class="p-10">
+  <h2 class="text-2xl font-bold mb-4 text-cyan-400">Live Attendance</h2>
+
+  <table class="w-full text-center border border-gray-700">
+    <thead class="bg-gray-800">
+      <tr>
+        <th class="p-2">Name</th>
+        <th>Status</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class="hover:bg-gray-800">
+        <td>Ahmad</td>
+        <td class="text-green-400">✔ Present</td>
+        <td>9:00</td>
+      </tr>
+
+      <tr class="hover:bg-gray-800">
+        <td>Ali</td>
+        <td class="text-yellow-400">⏰ Late</td>
+        <td>9:15</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SYSTEM VARIABLES -->
+<section class="p-10 bg-gray-900 rounded-xl m-10">
+  <h2 class="text-2xl font-bold mb-4 text-purple-400">System Data</h2>
+
+  <p>Project: <span id="projectName"></span></p>
+  <p>Total Students: <span id="totalStudents"></span></p>
+  <p>Status: <span id="systemActive"></span></p>
+  <p>List: <span id="registeredStudents"></span></p>
+  <p>Record: <span id="studentRecord"></span></p> <!-- ✅ Added -->
+
+  <button id="showSummaryBtn"
+    class="mt-4 px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded">
+    Show Summary
+  </button>
+
+  <div id="output" class="mt-4 p-4 bg-black rounded"></div>
+</section>
+
+<!-- STATS -->
+<section class="p-10 text-center">
+  <div class="grid md:grid-cols-4 gap-6">
+
+    <div class="bg-gray-900 p-6 rounded-xl">
+      <p class="text-3xl text-cyan-400">50+</p>
+      <p>Students</p>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl">
+      <p class="text-3xl text-purple-400">95%</p>
+      <p>Accuracy</p>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl">
+      <p class="text-3xl text-pink-400">24/7</p>
+      <p>Active</p>
+    </div>
+
+    <div class="bg-gray-900 p-6 rounded-xl">
+      <p class="text-3xl text-green-400">100%</p>
+      <p>Secure</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-black text-center p-5 mt-10 border-t border-gray-700">
+  <p>© 2026 AI Attendance System</p>
+</footer>
+
+<!-- Scripts -->
+<script src="src/pages/home/home.js" defer></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+
+</body>
+</html>
