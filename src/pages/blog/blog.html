@@ -6,15 +6,13 @@
   <title>Blog</title>
   <link rel="icon" type="image/png" href="/face-attendance-system/assets/images/favicon.png">
   <!-- Tailwind + Flowbite -->
-  <title>AI Blog</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet"/>
-
   <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 </head>
 
-<body class="bg-gray-950 text-white">
+<body class="bg-gray-950 text-white dark:bg-white dark:text-black">
 
 <!-- NAVBAR -->
 <header class="bg-black/70 backdrop-blur-lg p-4 flex justify-between items-center border-b border-gray-700">
@@ -25,7 +23,7 @@
 
   <nav class="space-x-6 hidden md:block">
     <a href="../../../index.html" class="hover:text-cyan-400">Home</a>
-    <a href="blog.html" class="hover:text-cyan-400">Blog</a>
+    <a href="blog.html" class="text-cyan-400">Blog</a>
     <a href="../about/about.html" class="hover:text-cyan-400">About</a>
     <a href="../contact/contact.html" class="hover:text-cyan-400">Contact</a>
     <a href="../records/records.html" class="hover:text-cyan-400">Records</a>
@@ -34,6 +32,7 @@
   <div class="space-x-4">
     <a href="../signin/signin.html" class="hover:text-cyan-400">Sign In</a>
     <a href="../signup/signup.html" class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg">Sign Up</a>
+    <button id="themeToggle" class="px-3 py-1 bg-cyan-500 rounded">Toggle</button>
   </div>
 </header>
 
@@ -53,14 +52,12 @@
   <!-- SIDEBAR -->
   <aside class="md:col-span-1 bg-gray-900 p-4 rounded-xl shadow-lg" data-aos="fade-right">
     <h2 class="text-xl font-bold text-cyan-400 mb-4">Categories</h2>
-
     <ul class="space-y-2 text-gray-300">
       <li><a href="#" class="hover:text-cyan-400">AI Technology</a></li>
       <li><a href="#" class="hover:text-cyan-400">Education</a></li>
       <li><a href="#" class="hover:text-cyan-400">Security</a></li>
       <li><a href="#" class="hover:text-cyan-400">Innovation</a></li>
     </ul>
-
     <!-- SEARCH -->
     <div class="mt-6">
       <input type="text" placeholder="Search..." 
@@ -70,7 +67,6 @@
 
   <!-- MAIN CONTENT -->
   <section class="md:col-span-2 space-y-6">
-
     <!-- ALERT -->
     <div class="p-4 text-blue-300 bg-gray-900 rounded-lg border border-blue-500" data-aos="fade-up">
       Latest articles on AI and smart attendance systems
@@ -79,11 +75,9 @@
     <!-- ARTICLE 1 -->
     <article class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition shadow-lg" data-aos="zoom-in">
       <h2 class="text-2xl font-bold text-cyan-400">AI in Attendance Systems</h2>
-
       <p class="mt-2 text-gray-300">
         Facial recognition is transforming attendance with accuracy, automation, and enhanced security.
       </p>
-
       <div class="mt-3 space-x-2">
         <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-sm">AI</span>
         <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-sm">Education</span>
@@ -93,11 +87,9 @@
     <!-- ARTICLE 2 -->
     <article class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition shadow-lg" data-aos="zoom-in">
       <h2 class="text-2xl font-bold text-purple-400">Benefits of Automation</h2>
-
       <p class="mt-2 text-gray-300">
         Automation reduces manual workload and allows educators to focus on teaching instead of paperwork.
       </p>
-
       <div class="mt-3 space-x-2">
         <span class="bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-sm">Automation</span>
         <span class="bg-pink-500/20 text-pink-400 px-2 py-1 rounded text-sm">Innovation</span>
@@ -110,31 +102,47 @@
       <button class="px-3 py-1 bg-gray-800 rounded hover:bg-cyan-500">2</button>
       <button class="px-3 py-1 bg-gray-800 rounded hover:bg-cyan-500">Next</button>
     </div>
-
   </section>
 
   <!-- RIGHT SIDEBAR -->
   <aside class="md:col-span-1 bg-gray-900 p-4 rounded-xl shadow-lg" data-aos="fade-left">
     <h2 class="text-xl font-bold text-purple-400 mb-4">Recent Posts</h2>
-
     <ul class="space-y-2 text-gray-300">
       <li><a href="#" class="hover:text-purple-400">AI vs Traditional</a></li>
       <li><a href="#" class="hover:text-purple-400">Future of Education</a></li>
       <li><a href="#" class="hover:text-purple-400">Security Challenges</a></li>
     </ul>
   </aside>
-
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-black text-center p-5 border-t border-gray-700">
+<footer class="bg-black text-white text-center p-5 mt-10 border-t border-gray-700 dark:bg-black dark:text-white">
   <p>© 2026 AI Attendance System</p>
 </footer>
+
 
 <!-- Scripts -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init();</script>
-
 <script src="../../../src/pages/blog/blog.js" defer></script>
+
+<!-- ✅ Theme Toggle Script -->
+<script>
+  const toggleBtn = document.getElementById("themeToggle");
+
+  // Load saved theme
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark");
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    if (document.documentElement.classList.contains("dark")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  });
+</script>
 </body>
 </html>

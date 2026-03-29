@@ -3,7 +3,7 @@ const projectName = "AI Face Attendance System";
 const totalStudents = 50;
 let systemActive = true;
 
-let registeredStudents = ["Ahmad", "Ali", "Sara", "Urooj"];
+const registeredStudents = ["Ahmad", "Ali", "Sara", "Urooj"];
 
 let studentRecord = {
   name: "Ahmad",
@@ -22,21 +22,17 @@ document.getElementById("studentRecord").innerHTML =
 // RANDOM STATUS SIMULATION
 const statuses = ["Present", "Absent", "Late"];
 
-function generateRandomRecord() {
-  let randomStudent = registeredStudents[Math.floor(Math.random() * registeredStudents.length)];
-  let randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
-  let now = new Date();
-  let time = now.toLocaleTimeString();
+const generateRandomRecord = () => {
+  const randomStudent = registeredStudents[Math.floor(Math.random() * registeredStudents.length)];
+  const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+  const now = new Date();
+  const time = now.toLocaleTimeString();
 
-  return {
-    name: randomStudent,
-    status: randomStatus,
-    time: time
-  };
-}
+  return { name: randomStudent, status: randomStatus, time };
+};
 
 // SUMMARY FUNCTION
-function showSummary() {
+const showSummary = () => {
   const registeredCount = registeredStudents.length;
   const percentageRegistered = ((registeredCount / totalStudents) * 100).toFixed(1);
 
@@ -57,7 +53,7 @@ function showSummary() {
     AI Detection Mode: Smart Recognition Enabled 🤖<br>
     System Health: Running smoothly with secure AI verification
   `;
-}
+};
 
 // EVENT LISTENERS
 document.getElementById("summaryBtn").addEventListener("click", showSummary);
@@ -68,3 +64,20 @@ document.getElementById("output").addEventListener("dblclick", () => {
   systemActive = !systemActive;
   document.getElementById("systemActive").innerHTML = systemActive ? "Yes" : "No";
 });
+
+// ✅ Object CRUD demo (Task 5)
+studentRecord.department = "Computer Science"; // Create
+console.log(`Student: ${studentRecord.name}`); // Read
+studentRecord.status = "Late"; // Update
+delete studentRecord.time; // Delete
+
+// ✅ String Methods demo (Task 6)
+const rawName = "   Ahmad Ali   ";
+console.log(rawName.trim().toUpperCase());   // TRIM + UPPERCASE
+console.log(rawName.includes("Ali"));        // INCLUDES
+console.log(rawName.replace("Ali", "Khan")); // REPLACE
+console.log(rawName.slice(0,5));             // SLICE
+console.log(rawName.startsWith("Ah"));       // STARTSWITH
+console.log(rawName.endsWith("li"));         // ENDSWITH
+console.log(rawName.split(" "));             // SPLIT
+console.log(rawName.concat(" - Student"));   // CONCAT

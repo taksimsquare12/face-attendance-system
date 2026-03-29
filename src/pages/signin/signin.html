@@ -6,13 +6,19 @@
   <title>Sign In</title>
   <link rel="icon" type="image/png" href="/face-attendance-system/assets/images/favicon.png">
 
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // ✅ important for toggle
+    }
+  </script>
 
   <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 </head>
 
-<body class="bg-gray-950 text-white">
+<body class="bg-gray-950 text-white dark:bg-white dark:text-black">
 
 <!-- NAVBAR -->
 <nav class="bg-black/70 backdrop-blur-lg p-4 flex justify-between items-center border-b border-gray-700">
@@ -29,8 +35,9 @@
     <a href="../records/records.html" class="hover:text-cyan-400">Records</a>
   </div>
   <div class="space-x-4">
-    <a href="../signin/signin.html" class="hover:text-cyan-400">Sign In</a>
+    <a href="../signin/signin.html" class="text-cyan-400">Sign In</a>
     <a href="../signup/signup.html" class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg">Sign Up</a>
+    <button id="themeToggle" class="px-3 py-1 bg-cyan-500 rounded">Toggle</button>
   </div>
 </nav>
 
@@ -41,7 +48,7 @@
 </section>
 
 <!-- FORM -->
-<section class="max-w-md mx-auto bg-gray-900 p-8 rounded-xl shadow-lg mt-10" data-aos="zoom-in">
+<section class="max-w-md mx-auto bg-gray-900 p-8 rounded-xl shadow-lg mt-10 dark:bg-gray-200 dark:text-black" data-aos="zoom-in">
 
   <h2 class="text-2xl font-bold text-center text-purple-400 mb-6">Sign In</h2>
 
@@ -50,11 +57,11 @@
   <form id="loginForm">
 
     <input type="email" id="email" placeholder="Email"
-      class="w-full mb-4 p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400">
+      class="w-full mb-4 p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400 dark:bg-white dark:text-black">
 
     <div class="relative mb-4">
       <input type="password" id="password" placeholder="Password"
-        class="w-full p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400">
+        class="w-full p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400 dark:bg-white dark:text-black">
       <button type="button" id="togglePassword"
         class="absolute right-2 top-2 text-sm text-gray-400">Show</button>
     </div>
@@ -78,14 +85,35 @@
 
 </section>
 
-<footer class="text-center p-5 mt-10 border-t border-gray-700">
+<!-- FOOTER -->
+<footer class="bg-black text-white text-center p-5 mt-10 border-t border-gray-700 dark:bg-black dark:text-white">
   <p>© 2026 AI Attendance System</p>
 </footer>
+
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init();</script>
 
 <script src="../../../src/pages/signin/signin.js"></script>
+
+<!-- ✅ Theme Toggle Script -->
+<script>
+  const toggleBtn = document.getElementById("themeToggle");
+
+  // Load saved theme
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark");
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    if (document.documentElement.classList.contains("dark")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  });
+</script>
 
 </body>
 </html>

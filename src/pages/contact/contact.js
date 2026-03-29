@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // FORM SUBMIT
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
 
     const name = form.querySelector("input[name='name']").value.trim();
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(form.action, {
         method: form.method,
         body: formData,
-        headers: { 'Accept': 'application/json' }
+        headers: { Accept: "application/json" }
       });
 
       if (response.ok) {
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ALERT FUNCTION
-  function showAlert(message, type) {
+  const showAlert = (message, type) => {
     alertBox.textContent = message;
     let style = "";
 
@@ -82,5 +82,28 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       alertBox.classList.add("hidden");
     }, 4000);
-  }
+  };
+
+  // ✅ Object CRUD demo (Task 5)
+  const contactData = {
+    name: "Urooj",
+    email: "urooj@example.com",
+    message: "Hello AI Attendance!"
+  };
+
+  contactData.department = "Support"; // Create
+  console.log(`Contact Name: ${contactData.name}`); // Read
+  contactData.message = "Updated message"; // Update
+  delete contactData.department; // Delete
+
+  // ✅ String Methods demo (Task 6)
+  const rawString = "   Contact Form Message   ";
+  console.log(rawString.trim().toUpperCase());   // TRIM + UPPERCASE
+  console.log(rawString.includes("Form"));       // INCLUDES
+  console.log(rawString.replace("Message", "Alert")); // REPLACE
+  console.log(rawString.slice(0,10));            // SLICE
+  console.log(rawString.startsWith("Contact"));  // STARTSWITH
+  console.log(rawString.endsWith("Message   ")); // ENDSWITH
+  console.log(rawString.split(" "));             // SPLIT
+  console.log(rawString.concat(" - Sent"));      // CONCAT
 });

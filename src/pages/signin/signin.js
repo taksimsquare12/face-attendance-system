@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // FORM SUBMIT
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", e => {
     e.preventDefault();
 
     const email = emailInput.value.trim();
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // MESSAGE FUNCTION
-  function showMessage(text, type) {
+  const showMessage = (text, type) => {
     let style = "";
     switch (type) {
       case "success":
@@ -93,5 +93,25 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       messageBox.classList.add("hidden");
     }, 4000);
-  }
+  };
+
+  // ---------------- EXTRA DEMOS ----------------
+
+  // ✅ Object CRUD demo (Task 5)
+  const loginInfo = { email: "urooj@example.com", status: "Active" };
+  loginInfo.role = "Student"; // Create
+  console.log(`Login Email: ${loginInfo.email}`); // Read
+  loginInfo.status = "Inactive"; // Update
+  delete loginInfo.role; // Delete
+
+  // ✅ String Methods demo (Task 6)
+  const rawString = "   Sign In Page   ";
+  console.log(rawString.trim().toUpperCase());   // TRIM + UPPERCASE
+  console.log(rawString.includes("Sign"));       // INCLUDES
+  console.log(rawString.replace("Page", "Form")); // REPLACE
+  console.log(rawString.slice(0,10));            // SLICE
+  console.log(rawString.startsWith("Sign"));     // STARTSWITH
+  console.log(rawString.endsWith("Page   "));    // ENDSWITH
+  console.log(rawString.split(" "));             // SPLIT
+  console.log(rawString.concat(" - Success"));   // CONCAT
 });

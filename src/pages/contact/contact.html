@@ -14,108 +14,132 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
 </head>
 
-<body class="bg-gray-950 text-white">
+<body class="bg-gray-950 text-white dark:bg-white dark:text-black">
 
 <!-- NAVBAR -->
-<nav class="bg-black/70 backdrop-blur-lg p-4 flex justify-between items-center border-b border-gray-700">
+<header class="bg-black/70 backdrop-blur-lg p-4 flex justify-between items-center border-b border-gray-700">
   <div class="flex items-center space-x-2">
     <img src="../../../assets/images/logo.png" class="h-8 w-8">
     <h1 class="font-bold text-xl text-cyan-400">AI Attendance</h1>
   </div>
 
-  <div class="space-x-6 hidden md:block">
+  <nav class="space-x-6 hidden md:block">
     <a href="../../../index.html" class="hover:text-cyan-400">Home</a>
     <a href="../blog/blog.html" class="hover:text-cyan-400">Blog</a>
     <a href="../about/about.html" class="hover:text-cyan-400">About</a>
     <a href="contact.html" class="text-cyan-400">Contact</a>
     <a href="../records/records.html" class="hover:text-cyan-400">Records</a>
-  </div>
+  </nav>
 
   <div class="space-x-4">
     <a href="../signin/signin.html" class="hover:text-cyan-400">Sign In</a>
     <a href="../signup/signup.html" class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg">Sign Up</a>
+    <button id="themeToggle" class="px-3 py-1 bg-cyan-500 rounded">Toggle</button>
   </div>
-</nav>
+</header>
 
-<!-- HERO -->
-<section class="text-center py-16 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
-  <h1 class="text-4xl font-bold text-cyan-400 mb-2" data-aos="fade-up">
-    Contact Us
-  </h1>
-  <p class="text-gray-300" data-aos="fade-up">
-    Get in touch with our AI system team
-  </p>
-</section>
+<main>
+  <!-- HERO -->
+  <section class="text-center py-16 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+    <h1 class="text-4xl font-bold text-cyan-400 mb-2" data-aos="fade-up">
+      Contact Us
+    </h1>
+    <p class="text-gray-300" data-aos="fade-up">
+      Get in touch with our AI system team
+    </p>
+  </section>
 
-<!-- FORM -->
-<section class="max-w-xl mx-auto bg-gray-900 p-8 shadow-lg mt-10 rounded-xl" data-aos="zoom-in">
+  <!-- FORM -->
+  <section class="max-w-xl mx-auto bg-gray-900 p-8 shadow-lg mt-10 rounded-xl" data-aos="zoom-in">
+    <h2 class="text-2xl font-bold mb-6 text-center text-purple-400">Send Message</h2>
+    
+    <!-- ALERT -->
+    <div id="formAlert" class="hidden p-4 mb-4 text-sm rounded-lg"></div>
 
-  <h2 class="text-2xl font-bold mb-6 text-center text-purple-400">Send Message</h2>
-  
-  <!-- ALERT -->
-  <div id="formAlert" class="hidden p-4 mb-4 text-sm rounded-lg"></div>
+    <form id="contactForm" action="https://formspree.io/f/mlgporvy" method="POST">
+      <input type="hidden" name="_subject" value="New Contact Message">
 
-  <form id="contactForm" action="https://formspree.io/f/mlgporvy" method="POST">
-    <input type="hidden" name="_subject" value="New Contact Message">
-    <div class="mb-4">
-      <label>Name</label>
-      <input type="text" id="name" name="name" required
-        class="w-full p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400">
+      <div class="mb-4">
+        <label for="name" class="block text-cyan-400 font-bold mb-1">Name</label>
+        <input type="text" id="name" name="name" required
+          placeholder="Enter your full name"
+          class="w-full p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400">
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-cyan-400 font-bold mb-1">Email</label>
+        <input type="email" id="email" name="email" required
+          placeholder="Enter your email address"
+          class="w-full p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400">
+      </div>
+
+      <div class="mb-4">
+        <label for="message" class="block text-cyan-400 font-bold mb-1">Message</label>
+        <textarea id="message" name="message" required
+          placeholder="Write your message here..."
+          class="w-full p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400"></textarea>
+      </div>
+
+      <button type="submit"
+        class="w-full py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg hover:scale-105 transition">
+        Send Message
+      </button>
+    </form>
+
+
+    <!-- MODAL BUTTON -->
+    <div class="text-center mt-6">
+      <button data-modal-target="contactModal" data-modal-toggle="contactModal"
+        class="px-4 py-2 bg-gray-700 hover:bg-cyan-500 rounded">
+        More Info
+      </button>
     </div>
+  </section>
 
-    <div class="mb-4">
-      <label>Email</label>
-      <input type="email" id="email" name="email" required
-        class="w-full p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400">
+  <!-- MODAL -->
+  <div id="contactModal" tabindex="-1" aria-hidden="true"
+    class="hidden fixed top-0 left-0 right-0 z-50 w-full p-4 h-full overflow-y-auto">
+    <div class="bg-gray-900 p-6 rounded-lg max-w-md mx-auto mt-20 text-center">
+      <h3 class="text-lg font-bold mb-4">Contact Info</h3>
+      <p>Email: support@attendanceapp.com</p>
+      <p>Phone: +92-300-1234567</p>
+      <button data-modal-hide="contactModal"
+        class="mt-4 px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded">
+        Close
+      </button>
     </div>
-
-    <div class="mb-4">
-      <label>Message</label>
-      <textarea id="message" name="message" required
-        class="w-full p-2 rounded bg-black border border-gray-700 focus:ring-2 focus:ring-cyan-400"></textarea>
-    </div>
-
-    <button type="submit"
-      class="w-full py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg hover:scale-105 transition">
-      Send Message
-    </button>
-  </form>
-
-  <!-- MODAL BUTTON -->
-  <div class="text-center mt-6">
-    <button data-modal-target="contactModal" data-modal-toggle="contactModal"
-      class="px-4 py-2 bg-gray-700 hover:bg-cyan-500 rounded">
-      More Info
-    </button>
   </div>
-</section>
-
-<!-- MODAL -->
-<div id="contactModal" tabindex="-1" aria-hidden="true"
-  class="hidden fixed top-0 left-0 right-0 z-50 w-full p-4 h-full overflow-y-auto">
-  <div class="bg-gray-900 p-6 rounded-lg max-w-md mx-auto mt-20 text-center">
-    <h3 class="text-lg font-bold mb-4">Contact Info</h3>
-    <p>Email: support@attendanceapp.com</p>
-    <p>Phone: +92-300-1234567</p>
-    <button data-modal-hide="contactModal"
-      class="mt-4 px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 rounded">
-      Close
-    </button>
-  </div>
-</div>
+</main>
 
 <!-- FOOTER -->
-<footer class="bg-black text-center p-5 mt-10 border-t border-gray-700">
+<footer class="bg-black text-white text-center p-5 mt-10 border-t border-gray-700 dark:bg-black dark:text-white">
   <p>© 2026 AI Attendance System</p>
 </footer>
 
 <!-- Scripts -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>AOS.init();</script>
-
-<!-- ✅ Flowbite JS added -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+<script src="../../../src/pages/contact/contact.js" defer></script>
 
-<script src="../../../src/pages/contact/contact.js"></script>
+<!-- ✅ Theme Toggle Script -->
+<script>
+  const toggleBtn = document.getElementById("themeToggle");
+
+  // Load saved theme
+  if (localStorage.getItem("theme") === "dark") {
+    document.documentElement.classList.add("dark");
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    document.documentElement.classList.toggle("dark");
+    if (document.documentElement.classList.contains("dark")) {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+  });
+</script>
+
 </body>
 </html>

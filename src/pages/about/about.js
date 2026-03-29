@@ -1,5 +1,4 @@
 // about.js
-
 // PROJECT OBJECT
 const projectInfo = {
   name: "AI Face Attendance System",
@@ -7,12 +6,12 @@ const projectInfo = {
   active: true,
   team: ["Urooj", "Dr. Ahmed"]
 };
-
 // DISPLAY PROJECT INFO ON PAGE (Dynamic)
-const aboutSection = document.querySelector("section");
+const aboutSection = document.querySelector("main");
 
 const infoBox = document.createElement("div");
-infoBox.className = "mt-6 p-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded shadow-lg";
+infoBox.className =
+  "mt-6 p-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded shadow-lg";
 
 infoBox.innerHTML = `
   <h3 class="font-bold text-lg">Project Details</h3>
@@ -23,7 +22,6 @@ infoBox.innerHTML = `
 `;
 
 aboutSection.appendChild(infoBox);
-
 
 // TEAM ANIMATION EFFECT
 const teamCards = document.querySelectorAll(".grid div");
@@ -39,7 +37,6 @@ teamCards.forEach((card, index) => {
   }, index * 300);
 });
 
-
 // INTERACTIVE FEATURE (BONUS 🔥)
 // Click to highlight team member
 teamCards.forEach(card => {
@@ -49,6 +46,22 @@ teamCards.forEach(card => {
   });
 });
 
+// ✅ Object CRUD demo (Task 5)
+projectInfo.department = "Computer Science"; // Create
+console.log(`Project: ${projectInfo.name}`); // Read
+projectInfo.active = false; // Update
+delete projectInfo.year; // Delete
+
+// ✅ String Methods demo (Task 6)
+const rawString = "   AI Attendance   ";
+console.log(rawString.trim().toUpperCase());   // TRIM + UPPERCASE
+console.log(rawString.includes("AI"));         // INCLUDES
+console.log(rawString.replace("Attendance", "System")); // REPLACE
+console.log(rawString.slice(0,5));             // SLICE
+console.log(rawString.startsWith("AI"));       // STARTSWITH
+console.log(rawString.endsWith("ce"));         // ENDSWITH
+console.log(rawString.split(" "));             // SPLIT
+console.log(rawString.concat(" - Project"));   // CONCAT
 
 // CONSOLE LOG (for debugging)
 console.log("About Page Loaded:", projectInfo);
