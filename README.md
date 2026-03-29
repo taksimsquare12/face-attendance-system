@@ -98,6 +98,15 @@ face-attendance-system/
   <img src="assets/screenshots/home.png" alt="Home Page" width="600"/>
 </p>
 <p align="center">
+  <img src="assets/screenshots/blog.png" alt="Blog Page" width="600"/>
+</p>
+<p align="center">
+  <img src="assets/screenshots/about.png" alt="About Page" width="600"/>
+</p>
+<p align="center">
+  <img src="assets/screenshots/contact.png" alt="Contact Page" width="600"/>
+</p>
+<p align="center">
   <img src="assets/screenshots/records.png" alt="Records Page" width="600"/>
 </p>
 <p align="center">
